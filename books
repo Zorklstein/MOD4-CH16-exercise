@@ -1,0 +1,52 @@
+import csv
+import sqlite3 as sq3
+
+with open('books.csv', 'w') as file:
+    file.write('author,book\n')
+    file.write('J R R Tolkien,The Hobbit\n')
+    file.write('Lynne Truss,"Eats, Shoots & Leaves"\n')
+
+with open('books.csv') as file:
+    books = list(csv.DictReader(file))
+    for book in books:
+        print(book)
+    file.close()
+
+
+with open('books2.csv', 'w') as file:
+    file.write('title,author,year\n')
+    file.write('The Weirdstone of Brisingamen,Alan Garner,1960\n')
+    file.write('Perdido Street Station,China Miéville,2000\n')
+    file.write('Thud!,Terry Pratchett,2005\n')
+    file.write('The Spellman Files,Lisa Lutz,2007\n')
+    file.write('Small Gods,Terry Pratchett,1992\n')
+
+with open('books2.csv') as file:
+    books = list(csv.DictReader(file))
+    for book in books:
+        print(book)
+    file.close()
+
+print('\n\n')
+conn = sq3.connect('books.db')
+curs = conn.cursor()
+
+curs.execute('''CREATE TABLE IF NOT EXISTS books 
+            (title TEXT PRIMARY KEY,
+            author TEXT,
+            year INTEGER)''')
+
+with open('books2.csv') as file:
+    ins = '''INSERT INTO books VALUES(?, ?, ?)'''
+
+    books = list(csv.DictReader(file))    
+    for book in books:
+        print(book)
+        curs.execute(ins, list(book))
+        print(book)
+
+    curs.execute('''SELECT * FROM books''')
+    table = curs.fetchall()
+    print(table)
+        
+    file.close()
