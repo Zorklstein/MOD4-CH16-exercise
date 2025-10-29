@@ -16,13 +16,13 @@ with open('books.csv') as file:
 
 print('\n\n')'''
 
-'''with open('books2.csv', 'w') as file:
+with open('books2.csv', 'w') as file:
     file.write('title,author,year\n')
     file.write('The Weirdstone of Brisingamen,Alan Garner,1960\n')
     file.write('Perdido Street Station,China Miéville,2000\n')
     file.write('Thud!,Terry Pratchett,2005\n')
     file.write('The Spellman Files,Lisa Lutz,2007\n')
-    file.write('Small Gods,Terry Pratchett,1992\n')'''
+    file.write('Small Gods,Terry Pratchett,1992\n')
     
 
 #with open('books2.csv') as file:
